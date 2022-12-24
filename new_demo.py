@@ -1,12 +1,10 @@
+import time
 import csv
 import pprint
-import time
-from selenium.webdriver import Chrome
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-option = Options()
-option.add_argument('--disable-blink-features=AutomationControlled')
-web = Chrome(options=option)
+from selenium.webdriver import Chrome
+import undetected_chromedriver as uc
+web = uc.Chrome()
 web.get('https://passport.ctrip.com/user/login')
 
 start_time = time.perf_counter()
@@ -126,4 +124,9 @@ print("结束的时间为：",end_time-start_time)
 
 
 
-time.sleep(400000)
+
+
+
+
+
+time.sleep(40000)

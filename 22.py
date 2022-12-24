@@ -2,11 +2,40 @@ import csv
 import pprint
 import time
 from selenium.webdriver import Chrome
+from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
+'''
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-automation'])
+options.add_argument("--disable-blink-features=AutomationControlled")
+driver = webdriver.Chrome(options=options)
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": """
+                    Object.defineProperty(navigator, 'webdriver', {
+                      get: () => undefined
+                    })
+                  """
+    })
+'''
+
+
+
+
+
 option = Options()
+option.add_experimental_option('excludeSwitches', ['enable-automation'])
 option.add_argument('--disable-blink-features=AutomationControlled')
 web = Chrome(options=option)
+web.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+    "source": """
+    Object.defineProperty(navigator, 'webdriver', {
+      get: () => undefined
+    })
+  """
+})
+
 web.get('https://passport.ctrip.com/user/login')
 
 start_time = time.perf_counter()
